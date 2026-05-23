@@ -58,8 +58,8 @@ def save_to_json(data, filename):
 # save_to_json(depression_abstracts, "data/raw/pubmed_depression.json")
 
 
-for feature in ["depression", "chronic pain", "neurology brain"]:
-    save_to_json(
-        get_abstracts(feature, max_results=50),
-        f"data/raw/pubmed_{feature.replace(' ', '_')}.json",
-    )
+# for feature in ["depression", "chronic pain", "neurology brain"]:
+#     save_to_json(
+#         get_abstracts(feature, max_results=50),
+#         f"data/raw/pubmed_{feature.replace(' ', '_')}.json",
+#     )
