@@ -1,5 +1,7 @@
 import requests
 from lxml import etree
+import json
+import time
 
 
 def search_pubmed(query, max_results):
@@ -41,12 +43,23 @@ def get_abstracts(query, max_results=50):
         abstract = fetch_abstract(id)
         if abstract:
             abstracts.append(abstract)
+        time.sleep(0.5)
     return abstracts
 
 
-depression_abstracts = get_abstracts("depression", max_results=5)
+# depression_abstracts = get_abstracts("depression", max_results=50)
 
-for i, abstract in enumerate(depression_abstracts):
-    print(f"--- Abstract {i + 1} ---")
-    print(abstract[:200])
-    print()
+
+def save_to_json(data, filename):
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+# save_to_json(depression_abstracts, "data/raw/pubmed_depression.json")
+
+
+for feature in ["depression", "chronic pain", "neurology brain"]:
+    save_to_json(
+        get_abstracts(feature, max_results=50),
+        f"data/raw/pubmed_{feature.replace(' ', '_')}.json",
+    )
