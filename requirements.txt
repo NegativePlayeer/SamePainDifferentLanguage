@@ -1,0 +1,7 @@
+requests
+pandas
+jupyter
+scikit-learn
+matplotlib
+seaborn
+sentence-transformers
