@@ -10,7 +10,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Create `.env`:
+Create `.env` (scraping only):
 
 ```
 GENIUS_TOKEN=your_token_here
@@ -18,43 +18,48 @@ GENIUS_TOKEN=your_token_here
 
 ### SSL on Windows (CERTIFICATE_VERIFY_FAILED)
 
-The scraper uses the `certifi` CA bundle by default. If it still fails (common with Miniconda):
-
 ```bash
 pip install -U certifi
-python -m scrapers.genius_scraper
 ```
 
-Last resort — add to `.env` (disables HTTPS verification, local dev only):
+If it still fails, add to `.env` (local dev only):
 
 ```
 GENIUS_VERIFY_SSL=false
 ```
 
-## Scrape lyrics by mood
+## Project layout (after merge)
 
-Full scrape (5 moods × 4 artists × 8 songs ≈ 100+ unique tracks after dedup):
+```
+scrapers/              # Genius mood scraper + preprocess
+data/processed/
+  songs.csv            # 160 songs, columns: id, title, artist, mood_label, language, lyrics
+  embeddings.npy       # (160, 384) — sentence-transformers
+  labels.npy           # mood_label per row (for coloring plots)
+  analiza_utworow_i_pca.ipynb   # Tasks 1–4: embed, PCA, t-SNE, clustering
+outputs/
+  pca_mood.png
+  tsne_mood.png
+data/raw/              # per-mood JSON (gitignored)
+```
+
+**Run the notebook from the repository root** so paths like `data/processed/songs.csv` resolve correctly.
+
+## 1. Scrape lyrics (optional if `songs.csv` already present)
 
 ```bash
 python -m scrapers.genius_scraper
+python -m scrapers.genius_scraper --from-raw   # rebuild CSV from data/raw/*.json
 ```
 
-One mood only (smoke test):
+## 2. Analysis (ziomki — notebook)
 
-```bash
-python -m scrapers.genius_scraper --mood sad --max-songs-per-artist 2
-```
+Open `data/processed/analiza_utworow_i_pca.ipynb` and run all cells, or re-run to refresh artifacts:
 
-Rebuild `data/processed/songs.csv` from cached raw JSON:
-
-```bash
-python -m scrapers.genius_scraper --from-raw
-```
-
-Outputs:
-
-- `data/raw/{sad,happy,angry,neutral,club}.json` — per-mood records (gitignored)
-- `data/processed/songs.csv` — columns: `id`, `title`, `artist`, `mood_label`, `language`, `lyrics`
+- Embeddings: `all-MiniLM-L6-v2` on column `lyrics`
+- Side-by-side **PCA** and **t-SNE** (color = `mood_label`)
+- `find_optimal_clusters` → **KMeans** (+ GMM in notebook)
+- Figures saved to `outputs/`
 
 ## Mood labels (proxy ground truth)
 
@@ -66,6 +71,9 @@ Outputs:
 | neutral | Coldplay, The Beatles, Fleetwood Mac, Pink Floyd |
 | club | David Guetta, Calvin Harris, Disclosure, Fisher |
 
-## Next step (Lab 12)
+## Git branches (merged into `master`)
 
-Embed `lyrics` with sentence-transformers, then PCA / t-SNE and clustering (KMeans + DBSCAN), coloring points by `mood_label`.
+- `feature-tasks-1-2` — notebook, embeddings, PCA/t-SNE
+- `feature-tasks-3-4` — clustering, plotly, evaluation (ARI)
+
+`pubmed_scraper` was removed from the project; Genius pipeline does not use it.

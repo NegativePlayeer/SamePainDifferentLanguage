@@ -8,3 +8,4 @@ sentence-transformers
 lyricsgenius
 python-dotenv
 certifi
+plotly
