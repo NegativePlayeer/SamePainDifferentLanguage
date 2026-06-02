@@ -5,3 +5,6 @@ scikit-learn
 matplotlib
 seaborn
 sentence-transformers
+lyricsgenius
+python-dotenv
+certifi
