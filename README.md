@@ -36,7 +36,7 @@ data/processed/
   songs.csv            # 160 songs, columns: id, title, artist, mood_label, language, lyrics
   embeddings.npy       # (160, 384) — sentence-transformers
   labels.npy           # mood_label per row (for coloring plots)
-  analiza_utworow_i_pca.ipynb   # Tasks 1–4: embed, PCA, t-SNE, clustering
+  song_mood_analysis.ipynb      # Tasks 1–4: embed, PCA, t-SNE, KMeans, DBSCAN (English)
 outputs/
   pca_mood.png
   tsne_mood.png
@@ -54,12 +54,12 @@ python -m scrapers.genius_scraper --from-raw   # rebuild CSV from data/raw/*.jso
 
 ## 2. Analysis (ziomki — notebook)
 
-Open `data/processed/analiza_utworow_i_pca.ipynb` and run all cells, or re-run to refresh artifacts:
+Open `data/processed/song_mood_analysis.ipynb` and run all cells from the **repo root**:
 
 - Embeddings: `all-MiniLM-L6-v2` on column `lyrics`
-- Side-by-side **PCA** and **t-SNE** (color = `mood_label`)
-- `find_optimal_clusters` → **KMeans** (+ GMM in notebook)
-- Figures saved to `outputs/`
+- Interactive **PCA** and **t-SNE** — hover shows **song title**, **artist**, **mood**
+- `find_optimal_clusters` → **KMeans** (fixed k) + **DBSCAN** (automatic cluster count)
+- Figures saved to `outputs/` (PNG if `kaleido` is installed: `pip install kaleido`)
 
 ## Mood labels (proxy ground truth)
 

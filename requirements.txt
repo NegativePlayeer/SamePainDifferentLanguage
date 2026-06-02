@@ -9,3 +9,4 @@ lyricsgenius
 python-dotenv
 certifi
 plotly
+kaleido
