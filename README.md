@@ -36,7 +36,8 @@ data/processed/
   songs.csv            # 160 songs, columns: id, title, artist, mood_label, language, lyrics
   embeddings.npy       # (160, 384) — sentence-transformers
   labels.npy           # mood_label per row (for coloring plots)
-  song_mood_analysis.ipynb      # Tasks 1–4: embed, PCA, t-SNE, KMeans, DBSCAN (English)
+notebooks/
+  song_mood_analysis.ipynb      # Tasks 1-4: embed, PCA, t-SNE, KMeans, DBSCAN (English)
 outputs/
   pca_mood.png
   tsne_mood.png
@@ -54,7 +55,9 @@ python -m scrapers.genius_scraper --from-raw   # rebuild CSV from data/raw/*.jso
 
 ## 2. Analysis (ziomki — notebook)
 
-Open `data/processed/song_mood_analysis.ipynb` and run all cells from the **repo root**:
+Open `notebooks/song_mood_analysis.ipynb` and run all cells (workspace = **repo root**).
+
+If Cursor/VS Code does not show a kernel: **Select Kernel** → `Python (SamePain DM)` or `Python 3 (ipykernel)` (Miniconda). Reload window after `pip install ipykernel`.
 
 - Embeddings: `all-MiniLM-L6-v2` on column `lyrics`
 - Interactive **PCA** and **t-SNE** — hover shows **song title**, **artist**, **mood**

@@ -1,0 +1,12 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\dawid\\miniconda3\\python.exe",
+  "jupyter.kernels.excludePythonEnvironments": false,
+  "notebook.kernelProviderAssociations": [
+    {
+      "viewType": "jupyter-notebook",
+      "kernelProvider": "ms-toolsai.jupyter"
+    }
+  ],
+  "jupyter.notebookFileRoot": "${workspaceFolder}",
+  "notebook.codeActionsOnSave": {}
+}

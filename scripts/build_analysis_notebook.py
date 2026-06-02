@@ -1,9 +1,10 @@
 """Regenerate the analysis notebook (English, DBSCAN, rich Plotly hovers)."""
 
 import json
+import sys
 from pathlib import Path
 
-NOTEBOOK_PATH = Path("data/processed/song_mood_analysis.ipynb")
+NOTEBOOK_PATH = Path("notebooks/song_mood_analysis.ipynb")
 
 
 def md(source: str) -> dict:
@@ -254,7 +255,7 @@ KMEANS_K = optimal_k["silhouette"]
 print(f"Using k={KMEANS_K} for KMeans (silhouette pick)")"""
     ),
     md(
-        """## Step 4: Clustering — KMeans (fixed k) & DBSCAN (automatic k)
+        """## Step 4: Clustering - KMeans (fixed k) and DBSCAN (automatic k)
 
 - **KMeans**: `k` from step 3 (or set `KMEANS_K = 5` to match five moods).
 - **DBSCAN**: `eps` from the k-distance elbow; number of clusters is **not** fixed upfront.
@@ -371,7 +372,7 @@ plot_clusters_interactive(
     labels_kmeans,
     VIZ_X,
     VIZ_Y,
-    f"KMeans (k={KMEANS_K}) on t-SNE — hover: song & artist",
+    f"KMeans (k={KMEANS_K}) on t-SNE - hover: song and artist",
     "kmeans_clusters_tsne.png",
 )
 plot_clusters_interactive(
@@ -379,7 +380,7 @@ plot_clusters_interactive(
     labels_dbscan,
     VIZ_X,
     VIZ_Y,
-    f"DBSCAN on t-SNE — hover: song & artist",
+    f"DBSCAN on t-SNE - hover: song and artist",
     "dbscan_clusters_tsne.png",
 )
 
@@ -395,16 +396,26 @@ plot_2d_manifold(
     ),
 ]
 
+_py_version = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+
 nb = {
     "nbformat": 4,
     "nbformat_minor": 5,
     "metadata": {
         "kernelspec": {
-            "display_name": "Python 3",
+            "display_name": "Python 3 (ipykernel)",
             "language": "python",
             "name": "python3",
         },
-        "language_info": {"name": "python", "pygments_lexer": "ipython3"},
+        "language_info": {
+            "name": "python",
+            "version": _py_version,
+            "mimetype": "text/x-python",
+            "codemirror_mode": {"name": "ipython", "version": 3},
+            "pygments_lexer": "ipython3",
+            "nbconvert_exporter": "python",
+            "file_extension": ".py",
+        },
     },
     "cells": CELLS,
 }
