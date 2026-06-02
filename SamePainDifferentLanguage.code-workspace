@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "C:\\Users\\dawid\\miniconda3\\python.exe",
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "jupyter.kernels.excludePythonEnvironments": [
+      "C:\\Python310\\python.exe",
+      "C:\\Users\\dawid\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe"
+    ]
+  }
+}

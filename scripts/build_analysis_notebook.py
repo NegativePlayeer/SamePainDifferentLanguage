@@ -403,9 +403,9 @@ nb = {
     "nbformat_minor": 5,
     "metadata": {
         "kernelspec": {
-            "display_name": "Python 3 (ipykernel)",
+            "display_name": "Python (SamePain DM)",
             "language": "python",
-            "name": "python3",
+            "name": "samepain-dm",
         },
         "language_info": {
             "name": "python",
