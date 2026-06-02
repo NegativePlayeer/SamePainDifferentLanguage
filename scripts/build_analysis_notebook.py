@@ -35,6 +35,7 @@ Run all cells from the **repository root**."""
     ),
     code(
         """import os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -51,7 +52,12 @@ from sklearn.metrics import silhouette_score, davies_bouldin_score, adjusted_ran
 from sklearn.neighbors import NearestNeighbors
 from numpy.typing import NDArray
 
-print("Imports OK")"""
+# Cursor/Jupyter often starts in notebooks/ — move to repo root
+ROOT = Path.cwd()
+if not (ROOT / "data" / "processed" / "songs.csv").exists():
+    ROOT = ROOT.parent
+os.chdir(ROOT)
+print("Project root:", ROOT.resolve())"""
     ),
     md(
         """## Step 1: Text vectorization

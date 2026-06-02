@@ -55,9 +55,19 @@ python -m scrapers.genius_scraper --from-raw   # rebuild CSV from data/raw/*.jso
 
 ## 2. Analysis (ziomki — notebook)
 
-Open `notebooks/song_mood_analysis.ipynb` and run all cells (workspace = **repo root**).
+### Easiest: run in browser (ignore Cursor kernel picker)
 
-If Cursor/VS Code does not show a kernel: **Select Kernel** → `Python (SamePain DM)` or `Python 3 (ipykernel)` (Miniconda). Reload window after `pip install ipykernel`.
+Double-click **`RUN_NOTEBOOK.bat`** or:
+
+```bash
+python run_notebook.py
+```
+
+Browser opens → **Kernel → Python 3** → **Run → Run All Cells**.
+
+### Or in Cursor
+
+Open `notebooks/song_mood_analysis.ipynb` → first cell sets project root automatically → **Run All**.
 
 - Embeddings: `all-MiniLM-L6-v2` on column `lyrics`
 - Interactive **PCA** and **t-SNE** — hover shows **song title**, **artist**, **mood**
